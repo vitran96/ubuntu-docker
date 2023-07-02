@@ -8,13 +8,13 @@
     - name: Include playbook configuration
       include_vars: "{{ item }}"
       with_fileglob:
-        - "{{ playbook_dir}}/config.yml"
+        - "{{ playbook_dir }}/config.yml"
       tags: ["always"]
 
   tasks:
     # - import_tasks: tasks/apt-update.yml
     #   when: apt-update
     #   tags: ["apt-update"]
-    - import_tasks: tasks/apt-install.yml
-      when: apt-install
-      tags: ["apt-install"]
+    - import_tasks: tasks/apt_install.yml
+      when: apt_install
+      tags: ["apt_install"]
