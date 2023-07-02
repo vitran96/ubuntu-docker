@@ -12,9 +12,12 @@
       tags: ["always"]
 
   tasks:
-    # - import_tasks: tasks/apt-update.yml
-    #   when: apt-update
-    #   tags: ["apt-update"]
     - import_tasks: tasks/apt_install.yml
       when: apt_install
       tags: ["apt_install"]
+    - import_tasks: tasks/docker.yml
+      when: docker
+      tags: ["docker"]
+    - import_tasks: tasks/zsh.yml
+      when: zsh
+      tags: ["zsh"]

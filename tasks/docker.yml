@@ -4,10 +4,7 @@
   become_user: root
   apt:
     update_cache: true
-    pkg:
-      - gawk
-      - bat
-      - jq
+    name: docker.io
   register: result
 - debug:
     msg={{ result.stdout.split('\n')[:-1] }}
