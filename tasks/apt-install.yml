@@ -1,0 +1,14 @@
+---
+- name: apt install packages
+  # ansible.builtin.apt:
+  #   name: "{{ item.name | default(item) }}"
+  #   state: "{{ item.state | default('present') }}"
+  # loop: "{{ apt_packages }}"
+  ansible.builtin.apt:
+    pgk:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    update_cache: true
