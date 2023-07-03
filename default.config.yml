@@ -1,3 +1,5 @@
-apt_install: true
-docker: true
-zsh: true
+# apt_install: true
+# docker: true
+# zsh: true
+
+urecon_password: "urecon"

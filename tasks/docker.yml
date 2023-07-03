@@ -8,3 +8,7 @@
   register: result
 - debug:
     msg={{ result.stdout.split('\n')[:-1] }}
+- name: Docker post-install "usermod -aG docker $USER"
+  shell: usermod -aG docker {{ ansible_user }}
+  become: true
+  become_user: root

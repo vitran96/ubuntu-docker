@@ -13,11 +13,14 @@
 
   tasks:
     - import_tasks: tasks/apt_install.yml
-      when: apt_install
       tags: ["apt_install"]
     - import_tasks: tasks/docker.yml
-      when: docker
       tags: ["docker"]
     - import_tasks: tasks/zsh.yml
-      when: zsh
       tags: ["zsh"]
+    - import_tasks: tasks/setup_urecon.yml
+      tags: ["setup_urecon"]
+    - import_tasks: tasks/start_postgres.yml
+      tags: ["start_postgres"]
+    - import_tasks: tasks/start_oracle.yml
+      tags: ["start_oracle"]

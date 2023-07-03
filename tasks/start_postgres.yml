@@ -1,0 +1,16 @@
+---
+- name: Copy docker-compose.db.yml into /opt/ur3
+  copy:
+    src: "{{ playbook_dir }}/docker-compose.db.yml"
+    dest: /opt/ur3/docker-compose.db.yml
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0775
+  become: yes
+  become_user: root
+# - name: Docker compose up
+#   shell: docker compose -f docker-compose.db.yml up -d
+#   args:
+#     chdir: /opt/ur3
+#   become: yes
+#   become_user: root

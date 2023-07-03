@@ -1,0 +1,72 @@
+---
+- name: Create urecon folder /opt/ur3/ur3io with o+w permissions. Owner and group base on the user running the playbook. '/opt/ur3' might not exist yet.
+  file:
+    path: /opt/ur3/ur3io
+    state: directory
+    mode: 0775
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+  become: yes
+  become_user: root
+- name: Create subfolders 'job', 'input', 'output', 'sql', 'db' within '/opt/ur3/ur3io' with o+w permissions. Owner and group base on the user running the playbook.
+  file:
+    path: /opt/ur3/ur3io/{{ item }}
+    state: directory
+    mode: 0775
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+  with_items:
+    - job
+    - input
+    - output
+    - sql
+    - db
+  become: yes
+  become_user: root
+- name: Create subfolders 'log', 'data', 'keys' within '/opt/ur3'
+  file:
+    path: /opt/ur3/{{ item }}
+    state: directory
+    mode: 0775
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+  with_items:
+    - log
+    - data
+    - keys
+  become: yes
+  become_user: root
+- name: Create a user for urecon
+  user:
+    name: urecon
+    comment: "urecon user"
+    shell: /bin/bash
+    createhome: yes
+    home: /home/urecon
+    password: "{{ urecon_password }}"
+    state: present
+  become: yes
+  become_user: root
+- name: Create symlink /opt/ur3/ur3io -> /home/urecon/ur3io
+  file:
+    src: /home/urecon/ur3io
+    dest: /opt/ur3/ur3io
+    state: link
+- name: Copy files from playbook_root/input into /opt/ur3/ur3io/input
+  copy:
+    src: "{{ playbook_dir }}/input"
+    dest: /opt/ur3/ur3io/input
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0775
+  become: yes
+  become_user: root
+- name: Copy files from playbook_root/keys into /opt/ur3/keys
+  copy:
+    src: "{{ playbook_dir }}/keys"
+    dest: /opt/ur3/keys
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0775
+  become: yes
+  become_user: root
