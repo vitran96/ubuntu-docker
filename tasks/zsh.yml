@@ -1,10 +1,10 @@
 ---
-- name: apt install packages
+- name: Install zsh
   become: true
   become_user: root
   apt:
     update_cache: true
     name: zsh
   register: result
-- debug:
-    msg={{ result.stdout.split('\n')[:-1] }}
+# - debug:
+#     msg={{ result.stdout.split('\n')[:-1] }}

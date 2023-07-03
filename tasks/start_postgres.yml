@@ -1,7 +1,7 @@
 ---
 - name: Copy docker-compose.db.yml into /opt/ur3
   copy:
-    src: "{{ playbook_dir }}/docker-compose.db.yml"
+    src: "{{ playbook_dir }}/compose/docker-compose.db.yml"
     dest: /opt/ur3/docker-compose.db.yml
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"

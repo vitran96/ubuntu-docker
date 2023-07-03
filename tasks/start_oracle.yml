@@ -10,7 +10,7 @@
   become_user: root
 - name: Copy docker-compose.oracle.yml into /opt/oracle
   copy:
-    src: "{{ playbook_dir }}/docker-compose.oracle.yml"
+    src: "{{ playbook_dir }}/compose/docker-compose.oracle.yml"
     dest: /opt/oracle/docker-compose.oracle.yml
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"

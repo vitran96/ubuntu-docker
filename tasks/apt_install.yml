@@ -1,5 +1,5 @@
 ---
-- name: apt install packages
+- name: Install packages
   become: true
   become_user: root
   apt:
@@ -9,5 +9,5 @@
       - bat
       - jq
   register: result
-- debug:
-    msg={{ result.stdout.split('\n')[:-1] }}
+# - debug:
+#     msg={{ result.stdout.split('\n')[:-1] }}
