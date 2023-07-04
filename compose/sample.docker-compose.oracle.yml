@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  oracle:
+    image: container-registry.oracle.com/database/free:latest
+    container_name: oracledb
+    restart: always
+    environment:
+      - ORACLE_PWD=password
+    ports:
+      - 1521:1521
+    volumes:
+      - ./data:/opt/oracle/oradata
