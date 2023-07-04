@@ -23,4 +23,5 @@
     - import_tasks: tasks/start_postgres.yml
       tags: ["start_postgres"]
     - import_tasks: tasks/start_oracle.yml
+      when: oracle
       tags: ["start_oracle"]

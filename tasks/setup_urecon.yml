@@ -1,4 +1,15 @@
 ---
+- name: Create a user for urecon
+  user:
+    name: "{{ urecon_user | default('urecon') }}"
+    comment: "urecon user"
+    shell: /bin/bash
+    createhome: yes
+    home: /home/urecon
+    password: "{{ urecon_password }}"
+    state: present
+  become: yes
+  become_user: root
 - name: Create urecon folder /opt/ur3/ur3io with o+w permissions. Owner and group base on the user running the playbook. '/opt/ur3' might not exist yet.
   file:
     path: /opt/ur3/ur3io
@@ -34,17 +45,6 @@
     - log
     - data
     - keys
-  become: yes
-  become_user: root
-- name: Create a user for urecon
-  user:
-    name: urecon
-    comment: "urecon user"
-    shell: /bin/bash
-    createhome: yes
-    home: /home/urecon
-    password: "{{ urecon_password }}"
-    state: present
   become: yes
   become_user: root
 # - name: Create symlink /opt/ur3/ur3io -> /home/urecon/ur3io

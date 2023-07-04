@@ -8,7 +8,7 @@
     mode: 0775
   become: yes
   become_user: root
-# - name: Docker compose up
+# - name: Docker compose up POSTGRES
 #   shell: docker compose -f docker-compose.db.yml up -d
 #   args:
 #     chdir: /opt/ur3

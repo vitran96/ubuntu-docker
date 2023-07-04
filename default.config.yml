@@ -1,5 +1,2 @@
-# apt_install: true
-# docker: true
-# zsh: true
-
+oracle: false
 urecon_password: "urecon"

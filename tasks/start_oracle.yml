@@ -17,7 +17,7 @@
     mode: 0775
   become: yes
   become_user: root
-# - name: Docker compose up
+# - name: Docker compose up ORACLE
 #   shell: docker compose -f docker-compose.oracle.yml up -d
 #   args:
 #     chdir: /opt/oracle
