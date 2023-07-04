@@ -6,7 +6,7 @@
     shell: /bin/bash
     createhome: yes
     home: /home/urecon
-    password: "{{ urecon_password }}"
+    # password: "{{ urecon_password | password_hash('sha512') }}"
     state: present
   become: yes
   become_user: root
@@ -19,7 +19,7 @@
     group: "{{ ansible_user }}"
   become: yes
   become_user: root
-- name: Create subfolders 'job', 'input', 'output', 'sql', 'db' within '/opt/ur3/ur3io' with o+w permissions. Owner and group base on the user running the playbook.
+- name: Create subfolders 'job', 'output', 'sql', 'db' within '/opt/ur3/ur3io' with o+w permissions. Owner and group base on the user running the playbook.
   file:
     path: /opt/ur3/ur3io/{{ item }}
     state: directory
@@ -28,13 +28,13 @@
     group: "{{ ansible_user }}"
   with_items:
     - job
-    - input
+    # - input
     - output
     - sql
     - db
   become: yes
   become_user: root
-- name: Create subfolders 'log', 'data', 'keys' within '/opt/ur3'
+- name: Create subfolders 'log', 'data' within '/opt/ur3'
   file:
     path: /opt/ur3/{{ item }}
     state: directory
@@ -44,7 +44,7 @@
   with_items:
     - log
     - data
-    - keys
+    # - keys
   become: yes
   become_user: root
 # - name: Create symlink /opt/ur3/ur3io -> /home/urecon/ur3io
@@ -53,20 +53,20 @@
 #     dest: /opt/ur3/ur3io
 #     state: link
 #   become: yes
-#   become_user: urecon
-- name: Copy files from playbook_root/input into /opt/ur3/ur3io/input
+#   become_user: "{{ urecon_user }}"
+- name: Copy files from playbook_root/input/* into /opt/ur3/ur3io/input
   copy:
     src: "{{ playbook_dir }}/input"
-    dest: /opt/ur3/ur3io/input
+    dest: /opt/ur3/ur3io/
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0775
   become: yes
   become_user: root
-- name: Copy files from playbook_root/keys into /opt/ur3/keys
+- name: Copy files from playbook_root/keys/* into /opt/ur3/keys
   copy:
     src: "{{ playbook_dir }}/keys"
-    dest: /opt/ur3/keys
+    dest: /opt/ur3/
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0775
